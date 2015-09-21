@@ -18,7 +18,5 @@ RUN cd /build; sudo -iu build git clone --recursive https://github.com/pfalcon/e
 # RUN sudo -iu build -- bash -c "cd /build/esp-open-sdk; make STANDALONE=n sdk_patch"
 RUN sudo -iu build -- bash -c "cd /build/esp-open-sdk; make"
 RUN sudo -iu build git clone https://github.com/micropython/micropython
-RUN sudo -iu build -- bash -c "cd micropython/esp8266; git checkout v1.4.5; export PATH=/build/esp-open-sdk/xtensa-lx106-elf/bin:$PATH; make"
-
-
-
+COPY . /home/build/esp8266
+RUN sudo -iu build -- bash -c "cd esp8266; git checkout v1.4.5; export PATH=/build/esp-open-sdk/xtensa-lx106-elf/bin:$PATH; make"
